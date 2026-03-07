@@ -278,3 +278,14 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
     color: var(--accent);
     margin-left: 10px;
 }
+
+/* Animation Helper for JS */
+.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Ensure elements are ready to fade */
+.project-frame, .value-container {
+    transform: translateY(20px);
+}

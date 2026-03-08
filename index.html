@@ -31,22 +31,46 @@
             <button class="chip secondary">Get a Demo</button>
         </div>
     </header>
-
     <section class="value-section">
         <h2 class="section-title">The Value I Deliver</h2>
         <div class="value-container">
-            <div class="mockup-chat">
-                <div class="mockup-header">
-                    <div class="mockup-user">
-                        <div class="user-avatar"></div>
-                        <span>Customer Query</span>
+            <div class="mockup-slider">
+                <div class="mockup-chat active" id="chat-shop">
+                    <div class="mockup-header">
+                        <div class="mockup-user">
+                            <div class="user-avatar"></div>
+                            <span>🛒 SHOPIO_AGENT.exe</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="msg user">Where is my order #502?</div>
+                        <div class="msg bot">Searching database... 🔍<br>Your order is in transit and will arrive by 4 PM today!</div>
                     </div>
                 </div>
-                <div class="mockup-body">
-                    <div class="msg user">Where is my order #502?</div>
-                    <div class="msg bot">Searching database... 🔍<br>Your order is in transit and will arrive by 4 PM today!</div>
+
+                <div class="mockup-chat" id="chat-edu">
+                    <div class="mockup-header">
+                        <div class="mockup-user">
+                            <div class="user-avatar edu"></div>
+                            <span>🎓 TRES_ACADEMY_BOT.js</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="msg user">I'm interested in Python Web Dev. What are the prerequisites?</div>
+                        <div class="msg bot">Scanning course catalog... 📚<br>For **Python Web Dev**, you just need basic Math. Enrollment closes April 15th!</div>
+                    </div>
+                </div>
+
+                <div class="slider-controls">
+                    <button id="prev-mockup" class="nav-btn" aria-label="Previous Mockup">←</button>
+                    <div class="indicator">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button id="next-mockup" class="nav-btn" aria-label="Next Mockup">→</button>
                 </div>
             </div>
+
             <div class="value-text">
                 <h3>Transforming Support into Sales</h3>
                 <ul class="benefit-list">

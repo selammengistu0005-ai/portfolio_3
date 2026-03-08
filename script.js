@@ -106,3 +106,9 @@ if (nextBtn && prevBtn) {
         updateSlider(currentSlide);
     });
 }
+
+// 6. INITIALIZATION
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme(); // This ensures the dark/light mode loads immediately
+    typeEffect();      // This starts the typing animation
+});

@@ -34,6 +34,7 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    width: 100%;
 }
 
 /* 2. HERO & GLASS EFFECTS */
@@ -253,17 +254,6 @@ body.dark-mode .ball { transform: translateX(32px); }
 body.dark-mode .moon-icon { opacity: 1; color: #f1f2f6; }
 body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
 
-/* 6. RESPONSIVENESS */
-@media (max-width: 768px) {
-    .value-container { 
-        display: flex;
-        flex-direction: column; 
-        text-align: center;
-    }
-    .hero { padding-top: 60px; }
-    #typing-text { font-size: 1.3rem; }
-    .mockup-slider { width: 100%; min-height: 350px; }
-}
 
 .chip {
     background: var(--accent);
@@ -396,4 +386,54 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
     opacity: 0; /* Add this line */
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Add this line */
+}
+
+/* 9. BUTTON & CASE STUDY STYLING */
+.toggle-case-study {
+    display: inline-block;
+    background: var(--accent);
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.toggle-case-study:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+    filter: brightness(1.1);
+}
+
+/* 6. RESPONSIVENESS */
+@media (max-width: 768px) {
+    .value-section {
+        width: 100%;
+        padding: 20px 10px; /* Tighten the edges */
+    }
+
+    .value-container {
+        display: flex;
+        flex-direction: column; /* This forces the vertical stack */
+        gap: 30px;
+        padding: 20px;
+        text-align: center;
+        align-items: center; /* Centers the mockup and list */
+    }
+
+    .mockup-slider {
+        width: 100%;
+        min-height: 400px; /* Give it enough height to stack messages */
+    }
+
+    .benefit-list li {
+        text-align: left; /* Keep text readable while container is centered */
+        font-size: 0.9rem;
+    }
 }

@@ -76,3 +76,33 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     setTimeout(typeEffect, 500);
 });
+
+// 7. MOCKUP SLIDER LOGIC (New)
+const mockups = document.querySelectorAll('.mockup-chat');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.getElementById('prev-mockup');
+const nextBtn = document.getElementById('next-mockup');
+let currentSlide = 0;
+
+if (nextBtn && prevBtn) {
+    const updateSlider = (index) => {
+        // Remove active class from all
+        mockups.forEach(m => m.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        
+        // Add to current
+        mockups[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+    };
+
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % mockups.length;
+        updateSlider(currentSlide);
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + mockups.length) % mockups.length;
+        updateSlider(currentSlide);
+    });
+}

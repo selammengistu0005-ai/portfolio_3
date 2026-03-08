@@ -9,10 +9,12 @@ const body = document.body;
 const typingElement = document.getElementById('typing-text');
 const caseStudyButtons = document.querySelectorAll('.toggle-case-study');
 
-// 2. THEME PERSISTENCE
 const initializeTheme = () => {
-    const savedTheme = localStorage.getItem('selam-portfolio-theme') || 'light';
-    if (savedTheme === 'dark') body.classList.add('dark-mode');
+    const savedTheme = localStorage.getItem('selam-portfolio-theme');
+    // If the user previously chose dark, or their system prefers dark
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        body.classList.add('dark-mode');
+    }
 };
 
 themeToggle.addEventListener('click', () => {
@@ -66,8 +68,6 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 document.querySelectorAll('.project-frame, .value-container').forEach(el => {
-    el.style.opacity = '0'; // Set initial state
-    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
     observer.observe(el);
 });
 

@@ -572,7 +572,14 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
     margin-left: 10px;
 }
 
-/* Animation Helper for JS */
+/* 1. THE "OFF" STATE (Add this) */
+.project-frame, .value-container {
+    opacity: 0;
+    transform: translateY(20px); /* Starts slightly lower */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* 2. THE "ON" STATE (What you already have) */
 .fade-in {
     opacity: 1 !important;
     transform: translateY(0) !important;

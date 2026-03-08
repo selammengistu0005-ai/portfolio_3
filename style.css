@@ -582,3 +582,112 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
 .project-frame, .value-container {
     transform: translateY(20px);
 }
+
+/* 7. INTERACTIVE MOCKUP SLIDER */
+.mockup-slider {
+    position: relative;
+    width: 100%;
+    min-height: 320px; /* Ensures space for the chat + buttons */
+    display: flex;
+    flex-direction: column;
+}
+
+.mockup-chat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mockup-chat.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    position: relative; /* Takes up space so the container knows its height */
+}
+
+/* Specific styling for the E-learning Avatar */
+.user-avatar.edu {
+    background: var(--accent);
+    background-image: linear-gradient(45deg, #6c5ce7, #a29bfe);
+}
+
+/* Slider Controls */
+.slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: var(--glass-blur);
+}
+
+.nav-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Progress Dots */
+.indicator {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--toggle-bg);
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.dot.active {
+    background: var(--accent);
+    width: 24px;
+    border-radius: 10px;
+}
+
+/* 8. CASE STUDY ANIMATIONS (Fixed) */
+.case-study {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, margin-top 0.4s ease;
+}
+
+.case-study.active {
+    max-height: 500px;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+/* Add this to ensure messages stack vertically inside the slider */
+.mockup-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* This ensures the bot message always stays on the right */
+.msg.bot {
+    align-self: flex-end; 
+}

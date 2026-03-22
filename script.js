@@ -71,44 +71,58 @@ document.querySelectorAll('.project-frame, .value-container').forEach(el => {
     observer.observe(el);
 });
 
-// 6. INITIALIZATION
-document.addEventListener('DOMContentLoaded', () => {
-    initializeTheme();
-    setTimeout(typeEffect, 500);
+// 7. CIRCULAR PROJECT CAROUSEL
+const track = document.querySelector('.carousel-track');
+const projects = Array.from(document.querySelectorAll('.project-frame'));
+const pNextBtn = document.getElementById('next-project');
+const pPrevBtn = document.getElementById('prev-project');
+let currentIndex = 0;
+
+const updateCarousel = () => {
+    projects.forEach((card, i) => {
+        // Remove all positional classes first
+        card.classList.remove('active-card', 'left-card', 'right-card', 'hidden-card');
+
+        if (i === currentIndex) {
+            card.classList.add('active-card');
+        } else if (i === (currentIndex - 1 + projects.length) % projects.length) {
+            card.classList.add('left-card');
+        } else if (i === (currentIndex + 1) % projects.length) {
+            card.classList.add('right-card');
+        } else {
+            card.classList.add('hidden-card');
+        }
+    });
+};
+
+// Click-to-Focus Logic
+projects.forEach((card, i) => {
+    card.addEventListener('click', () => {
+        if (currentIndex !== i) {
+            currentIndex = i;
+            updateCarousel();
+        }
+    });
 });
 
-// 7. MOCKUP SLIDER LOGIC (New)
-const mockups = document.querySelectorAll('.mockup-chat');
-const dots = document.querySelectorAll('.dot');
-const prevBtn = document.getElementById('prev-mockup');
-const nextBtn = document.getElementById('next-mockup');
-let currentSlide = 0;
-
-if (nextBtn && prevBtn) {
-    const updateSlider = (index) => {
-        // Remove active class from all
-        mockups.forEach(m => m.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-        
-        // Add to current
-        mockups[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
-    };
-
-    nextBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % mockups.length;
-        updateSlider(currentSlide);
+// Button Controls
+if (pNextBtn && pPrevBtn) {
+    pNextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % projects.length;
+        updateCarousel();
     });
 
-    prevBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + mockups.length) % mockups.length;
-        updateSlider(currentSlide);
+    pPrevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+        updateCarousel();
     });
 }
 
-// 6. INITIALIZATION
+// 8. FINAL INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
-    initializeTheme(); // This ensures the dark/light mode loads immediately
-    typeEffect();      // This starts the typing animation
+    initializeTheme();
+    setTimeout(typeEffect, 500);
+    updateCarousel(); // Initialize the first 3D state
 });

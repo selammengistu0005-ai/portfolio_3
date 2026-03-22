@@ -124,8 +124,13 @@ if (pNextBtn && pPrevBtn) {
 }
 
 // 8. FINAL INITIALIZATION
+// Replace your existing Line 116-121 with this:
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
-    setTimeout(typeEffect, 500);
-    updateCarousel(); // Initialize the first 3D state
+    
+    // Small delay ensures the browser has calculated the 3D perspective
+    setTimeout(() => {
+        updateCarousel(); 
+        typeEffect();
+    }, 100); 
 });

@@ -233,17 +233,17 @@ body {
 
 /* Left Wing - Sharp Angle */
 .project-frame.left-card {
-    opacity: 0.8;
+    opacity: 0.7;
     visibility: visible;
-    transform: translate3d(-350px, 0, -150px) rotateY(55deg); /* Pushed back and tilted */
+    transform: translate3d(-450px, 0, -250px) rotateY(45deg); 
     z-index: 5;
 }
 
-/* Right Wing - Sharp Angle */
+/* Right Wing - Sharp Angle & Deep Push */
 .project-frame.right-card {
-    opacity: 0.8;
+    opacity: 0.7;
     visibility: visible;
-    transform: translate3d(350px, 0, -150px) rotateY(-55deg); /* Pushed back and tilted */
+    transform: translate3d(450px, 0, -250px) rotateY(-45deg); 
     z-index: 5;
 }
 

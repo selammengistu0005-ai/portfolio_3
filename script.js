@@ -73,7 +73,7 @@ document.querySelectorAll('.project-frame, .value-container').forEach(el => {
     observer.observe(el);
 });
 
-// 7. CIRCULAR PROJECT CAROUSEL
+// 7. CIRCULAR PROJECT CAROUSEL (Coverflow Optimized)
 const track = document.querySelector('.carousel-track');
 const projects = Array.from(document.querySelectorAll('.project-frame'));
 const pNextBtn = document.getElementById('next-project');
@@ -82,9 +82,10 @@ let currentIndex = 0;
 
 const updateCarousel = () => {
     projects.forEach((card, i) => {
-        // Remove all positional classes first
+        // 1. Reset all classes
         card.classList.remove('active-card', 'left-card', 'right-card', 'hidden-card');
 
+        // 2. Assign positions based on index
         if (i === currentIndex) {
             card.classList.add('active-card');
         } else if (i === (currentIndex - 1 + projects.length) % projects.length) {
@@ -97,7 +98,7 @@ const updateCarousel = () => {
     });
 };
 
-// Click-to-Focus Logic
+// Click-to-Focus: Clicking a side card brings it to the front
 projects.forEach((card, i) => {
     card.addEventListener('click', () => {
         if (currentIndex !== i) {
@@ -107,10 +108,10 @@ projects.forEach((card, i) => {
     });
 });
 
-// Button Controls
+// Button Controls with Event Propagation fix
 if (pNextBtn && pPrevBtn) {
     pNextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevents click from bubbling to the card
         currentIndex = (currentIndex + 1) % projects.length;
         updateCarousel();
     });

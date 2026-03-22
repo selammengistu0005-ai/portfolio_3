@@ -193,6 +193,8 @@ body {
     align-items: center;
     justify-content: center;
     transform-style: preserve-3d;
+    perspective: 2000px; /* Ensure this is here */
+    overflow: visible !important; /* <--- ADD THIS: Stops the side cards from disappearing */
 }
 
 .carousel-track {
@@ -204,9 +206,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none; /* Allows clicks to pass through to buttons/cards */
 }
 
 .project-frame {
+    pointer-events: auto;
     position: absolute;
     width: 320px;
     background: var(--card-bg);

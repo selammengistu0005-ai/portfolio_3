@@ -17,11 +17,13 @@ const initializeTheme = () => {
     }
 };
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
-    localStorage.setItem('selam-portfolio-theme', isDark ? 'dark' : 'light');
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('selam-portfolio-theme', isDark ? 'dark' : 'light');
+    });
+}
 
 // 3. TYPING EFFECT
 const introText = "Hello, I'm Selam Mengistu.\nI build AI agents for websites."; 

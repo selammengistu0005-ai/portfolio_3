@@ -581,43 +581,50 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
     .carousel-nav-btn.prev { left: 20px; }
     .carousel-nav-btn.next { right: 20px; }
 }
-
 /* Phones (iPhone/Android) */
 @media (max-width: 600px) {
     .carousel-stage {
-        height: 450px; /* Pull the stage height in */
-        perspective: 1000px; /* Tighter perspective for smaller screens */
+        height: 380px !important; /* Shorter for mobile */
+        perspective: 800px !important; /* Makes 3D feel more natural on small glass */
     }
 
     .project-frame {
-        width: 220px;  /* Make frames even smaller on tiny phones */
-        height: 300px;
-        margin-left: -110px;
-        margin-top: -150px;
+        width: 190px !important;  /* Much smaller for mobile */
+        height: 270px !important;
+        margin-left: -95px !important; /* Must be half of 190 */
+        margin-top: -135px !important; /* Must be half of 270 */
     }
 
     .project-frame.active-card {
-        transform: translate3d(0, 0, 150px) scale(1) !important;
+        transform: translate3d(0, 0, 120px) scale(1) !important;
     }
 
     .project-frame.left-card {
-        transform: translate3d(-140px, 0, 0px) rotateY(45deg) scale(0.65) !important;
-        opacity: 0.4 !important;
+        /* Move it only 120px so it stays visible on the screen edge */
+        transform: translate3d(-120px, 0, 0px) rotateY(35deg) scale(0.7) !important;
+        opacity: 0.5 !important;
     }
 
     .project-frame.right-card {
-        transform: translate3d(140px, 0, 0px) rotateY(-45deg) scale(0.65) !important;
-        opacity: 0.4 !important;
+        transform: translate3d(120px, 0, 0px) rotateY(-35deg) scale(0.7) !important;
+        opacity: 0.5 !important;
     }
 
-    /* Hide far-off cards on mobile to prevent horizontal scrolling */
+    /* Keep the far cards hidden so the user doesn't get confused */
     .project-frame.far-left-card, 
-    .project-frame.far-right-card {
+    .project-frame.far-right-card,
+    .project-frame.hidden-card {
         display: none !important;
     }
 
+    /* Move nav buttons inside the screen so they are clickable */
+    .carousel-nav-btn.prev { left: 15px !important; }
+    .carousel-nav-btn.next { right: 15px !important; }
+    
     .carousel-nav-btn {
-        width: 40px;
-        height: 40px;
+        width: 42px !important;
+        height: 42px !important;
+        background: var(--accent) !important; /* Make buttons easier to see on mobile */
+        color: white !important;
     }
 }

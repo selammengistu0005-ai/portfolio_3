@@ -209,72 +209,51 @@ body {
     perspective: 1500px;
 }
 
+/* Replace Lines 176 - 250 with this */
 .project-frame {
     position: absolute;
-    /* This creates the "Starting Line" in the dead center */
     left: 50%;
     top: 50%;
     width: 300px;
-    margin-left: -150px; /* Half of width */
-    margin-top: -200px;  /* Half of height */
-    
+    height: 400px; /* Explicit height */
+    margin-left: -150px;
+    margin-top: -200px;
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
                 opacity 0.6s ease, 
-                z-index 0.1s;
+                box-shadow 0.3s ease;
     cursor: pointer;
-    user-select: none;
     overflow: hidden;
-}
-.carousel-track.is-ready {
-    opacity: 1; /* Reveal it only when JS says so */
+    will-change: transform, opacity; /* Performance boost */
 }
 
-
-/* --- THE COVERFLOW POSITIONS --- */
-/* --- THE 3D COVERFLOW POSITIONS --- */
 .project-frame.active-card {
     opacity: 1;
-    transform: translate3d(0, 0, 350px) scale(1.1);
-    z-index: 10;
-    pointer-events: auto;
+    transform: translate3d(0, 0, 400px) scale(1);
     visibility: visible;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
 }
 
 .project-frame.left-card {
-    opacity: 0.85;
-    transform: translate3d(-280px, 0, 150px) rotateY(45deg) scale(0.9);
-    z-index: 8;
-    pointer-events: auto;
-    visibility: visible;
+    opacity: 0.8;
+    transform: translate3d(-320px, 0, 100px) rotateY(35deg) scale(0.85);
 }
 
 .project-frame.right-card {
-    opacity: 0.85;
-    transform: translate3d(280px, 0, 150px) rotateY(-45deg) scale(0.9);
-    z-index: 8;
-    pointer-events: auto;
-    visibility: visible;
+    opacity: 0.8;
+    transform: translate3d(320px, 0, 100px) rotateY(-35deg) scale(0.85);
 }
 
 .project-frame.far-left-card {
-    opacity: 0.5;
-    transform: translate3d(-520px, 0, 0px) rotateY(65deg) scale(0.75);
-    z-index: 5;
-    pointer-events: auto;
-    visibility: visible;
+    opacity: 0.4;
+    transform: translate3d(-550px, 0, -100px) rotateY(55deg) scale(0.7);
 }
 
 .project-frame.far-right-card {
-    opacity: 0.5;
-    transform: translate3d(520px, 0, 0px) rotateY(-65deg) scale(0.75);
-    z-index: 5;
-    pointer-events: auto;
-    visibility: visible;
+    opacity: 0.4;
+    transform: translate3d(550px, 0, -100px) rotateY(-55deg) scale(0.7);
 }
 
 .project-frame.hidden-card {

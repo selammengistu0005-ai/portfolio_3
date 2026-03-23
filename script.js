@@ -81,39 +81,32 @@ const pPrevBtn = document.getElementById('prev-project');
 let currentIndex = 0;;
 
 /* Replace the entire updateCarousel function with this */
+/* Replace your updateCarousel logic around Line 90 */
 const updateCarousel = () => {
     projects.forEach((card, i) => {
-        // 1. Reset all 3D position classes
         card.classList.remove('active-card', 'left-card', 'right-card', 'far-left-card', 'far-right-card', 'hidden-card');
 
-        // 2. Calculate relative circular distance
         const total = projects.length;
         let dist = i - currentIndex;
         
-        // Wrap logic: ensures the distance is always between -2 and 2 for 5 cards
         if (dist > total / 2) dist -= total;
         if (dist < -total / 2) dist += total;
 
-        // 3. Assign classes based on circular distance
-        // 3. Assign classes based on circular distance
+        // Force Z-Index based on distance from center
+        card.style.zIndex = (10 - Math.abs(dist));
+
         if (dist === 0) {
             card.classList.add('active-card');
-            card.style.zIndex = "10";
-        } else if (dist === 1 || dist === -4) {
+        } else if (dist === 1) {
             card.classList.add('right-card');
-            card.style.zIndex = "8";
-        } else if (dist === -1 || dist === 4) {
+        } else if (dist === -1) {
             card.classList.add('left-card');
-            card.style.zIndex = "8";
-        } else if (dist === 2 || dist === -3) { 
+        } else if (dist === 2) { 
             card.classList.add('far-right-card');
-            card.style.zIndex = "5";
-        } else if (dist === -2 || dist === 3) {
+        } else if (dist === -2) {
             card.classList.add('far-left-card');
-            card.style.zIndex = "5";
         } else {
             card.classList.add('hidden-card');
-            card.style.zIndex = "1";
         }
     });
 };

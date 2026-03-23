@@ -111,9 +111,12 @@ const updateCarousel = () => {
     });
 };
 
-// Click-to-Focus: Clicking a side card brings it to the front
+// Click-to-Focus Fix
 projects.forEach((card, i) => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+        // Stop the click if we're hitting buttons or links
+        if (e.target.closest('.frame-btn') || e.target.closest('.toggle-case-study')) return;
+
         if (currentIndex !== i) {
             currentIndex = i;
             updateCarousel();

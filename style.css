@@ -176,14 +176,15 @@ body {
 /* 4. PROJECT GALLERY */
 .carousel-stage {
     position: relative;
-    width: 100%; /* Changed from 100vw to 100% to prevent horizontal scroll bars */
-    min-height: 600px; /* Use min-height instead of height */
+    width: 100%;
+    max-width: 1100px; /* Widen to allow side cards to show */
+    height: 500px; 
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 2000px;
-    overflow: visible;
-    margin: 40px 0; /* Add space above and below the gallery */
+    margin: 40px auto;
+    overflow: visible; 
 }
 
 .carousel-viewport {
@@ -198,15 +199,12 @@ body {
 }
 
 .carousel-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    width: 300px; /* Match card width exactly */
+    height: 400px;
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none; /* Allows clicks to pass through to buttons/cards */
+    /* Flexbox REMOVED so absolute cards can fan out */
 }
 
 /* Replace the entire .project-frame block with this */
@@ -229,6 +227,7 @@ body {
 
 /* --- THE COVERFLOW POSITIONS --- */
 /* Front & Center */
+/* Front & Center - Line 191 */
 .project-frame.active-card {
     opacity: 1;
     transform: translate3d(0, 0, 300px) scale(1.1);
@@ -237,16 +236,17 @@ body {
     box-shadow: 0 30px 60px rgba(0,0,0,0.3);
 }
 
-/* Inner Wing (Left/Right) */
+/* Inner Wing Left - Line 199 */
 .project-frame.left-card {
     opacity: 0.9;
-    transform: translate3d(-180px, 0, 150px) rotateY(25deg) scale(0.9);
+    transform: translate3d(-180px, 0, 150px) rotateY(20deg) scale(0.9);
     z-index: 8;
 }
 
+/* Inner Wing Right - Line 204 */
 .project-frame.right-card {
     opacity: 0.9;
-    transform: translate3d(180px, 0, 150px) rotateY(-25deg) scale(0.9);
+    transform: translate3d(180px, 0, 150px) rotateY(-20deg) scale(0.9);
     z-index: 8;
 }
 
@@ -292,8 +292,8 @@ body {
     backdrop-filter: var(--glass-blur);
 }
 
-.carousel-nav-btn.prev { left: 5%; }
-.carousel-nav-btn.next { right: 5%; }
+.carousel-nav-btn.prev { left: -100px; }
+.carousel-nav-btn.next { right: -100px; }
 
 .carousel-nav-btn:hover {
     background: var(--accent);

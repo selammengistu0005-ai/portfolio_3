@@ -183,7 +183,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    perspective: 2000px;
+    perspective: 1500px;
     margin: 40px auto;
 }
 
@@ -224,25 +224,27 @@ body {
 }
 
 /* --- THE COVERFLOW POSITIONS --- */
+/* --- THE 3D COVERFLOW POSITIONS --- */
 .project-frame.active-card {
     opacity: 1;
-    transform: translate3d(0, 0, 300px) scale(1.1);
+    transform: translate3d(0, 0, 350px) scale(1.1);
     z-index: 10;
     pointer-events: auto;
     visibility: visible;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
 }
 
 .project-frame.left-card {
-    opacity: 0.9;
-    transform: translate3d(-220px, 0, 100px) rotateY(25deg) scale(0.9);
+    opacity: 0.85;
+    transform: translate3d(-280px, 0, 150px) rotateY(45deg) scale(0.9);
     z-index: 8;
     pointer-events: auto;
     visibility: visible;
 }
 
 .project-frame.right-card {
-    opacity: 0.9;
-    transform: translate3d(220px, 0, 100px) rotateY(-25deg) scale(0.9);
+    opacity: 0.85;
+    transform: translate3d(280px, 0, 150px) rotateY(-45deg) scale(0.9);
     z-index: 8;
     pointer-events: auto;
     visibility: visible;
@@ -250,7 +252,7 @@ body {
 
 .project-frame.far-left-card {
     opacity: 0.5;
-    transform: translate3d(-400px, 0, -100px) rotateY(45deg) scale(0.75);
+    transform: translate3d(-520px, 0, 0px) rotateY(65deg) scale(0.75);
     z-index: 5;
     pointer-events: auto;
     visibility: visible;
@@ -258,7 +260,7 @@ body {
 
 .project-frame.far-right-card {
     opacity: 0.5;
-    transform: translate3d(400px, 0, -100px) rotateY(-45deg) scale(0.75);
+    transform: translate3d(520px, 0, 0px) rotateY(-65deg) scale(0.75);
     z-index: 5;
     pointer-events: auto;
     visibility: visible;
@@ -266,7 +268,7 @@ body {
 
 .project-frame.hidden-card {
     opacity: 0;
-    transform: translate3d(0, 0, -200px) scale(0.5);
+    transform: translate3d(0, 0, -500px) scale(0.5);
     z-index: 1;
     visibility: hidden;
 }
@@ -290,8 +292,8 @@ body {
     backdrop-filter: var(--glass-blur);
 }
 
-.carousel-nav-btn.prev { left: -100px; }
-.carousel-nav-btn.next { right: -100px; }
+.carousel-nav-btn.prev { left: -120px; }
+.carousel-nav-btn.next { right: -120px; }
 
 .carousel-nav-btn:hover {
     background: var(--accent);

@@ -567,3 +567,57 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
     max-height: 80%;
     object-fit: contain;
 }
+
+/* 10. MOBILE & TABLET 3D OPTIMIZATION */
+
+/* Tablets (iPad/Portrait) */
+@media (max-width: 1024px) {
+    .project-frame.left-card {
+        transform: translate3d(-220px, 0, 80px) rotateY(35deg) scale(0.75) !important;
+    }
+    .project-frame.right-card {
+        transform: translate3d(220px, 0, 80px) rotateY(-35deg) scale(0.75) !important;
+    }
+    .carousel-nav-btn.prev { left: 20px; }
+    .carousel-nav-btn.next { right: 20px; }
+}
+
+/* Phones (iPhone/Android) */
+@media (max-width: 600px) {
+    .carousel-stage {
+        height: 450px; /* Pull the stage height in */
+        perspective: 1000px; /* Tighter perspective for smaller screens */
+    }
+
+    .project-frame {
+        width: 220px;  /* Make frames even smaller on tiny phones */
+        height: 300px;
+        margin-left: -110px;
+        margin-top: -150px;
+    }
+
+    .project-frame.active-card {
+        transform: translate3d(0, 0, 150px) scale(1) !important;
+    }
+
+    .project-frame.left-card {
+        transform: translate3d(-140px, 0, 0px) rotateY(45deg) scale(0.65) !important;
+        opacity: 0.4 !important;
+    }
+
+    .project-frame.right-card {
+        transform: translate3d(140px, 0, 0px) rotateY(-45deg) scale(0.65) !important;
+        opacity: 0.4 !important;
+    }
+
+    /* Hide far-off cards on mobile to prevent horizontal scrolling */
+    .project-frame.far-left-card, 
+    .project-frame.far-right-card {
+        display: none !important;
+    }
+
+    .carousel-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+}

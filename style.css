@@ -214,6 +214,10 @@ body {
 
 .project-frame {
     position: absolute; /* Absolute within the relative track */
+    left: 50%; /* New: Move to horizontal center */
+    top: 50%;  /* New: Move to vertical center */
+    margin-left: -150px; /* New: Offset by half of card width (300px / 2) */
+    margin-top: -200px;
     width: 300px;
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);

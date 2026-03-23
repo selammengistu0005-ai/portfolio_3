@@ -174,17 +174,17 @@ body {
 }
 
 /* 4. PROJECT GALLERY */
+/* 4. PROJECT GALLERY */
 .carousel-stage {
     position: relative;
     width: 100%;
-    max-width: 1100px; /* Widen to allow side cards to show */
+    max-width: 1100px;
     height: 500px; 
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 2000px;
     margin: 40px auto;
-    overflow: visible; 
 }
 
 .carousel-viewport {
@@ -194,78 +194,76 @@ body {
     align-items: center;
     justify-content: center;
     transform-style: preserve-3d;
-    perspective: 2000px; /* Ensure this is here */
-    overflow: visible !important; /* <--- ADD THIS: Stops the side cards from disappearing */
 }
 
 .carousel-track {
-    position: absolute;
-    width: 300px; /* Match card width exactly */
+    position: relative;
+    width: 300px; 
     height: 400px;
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Flexbox REMOVED so absolute cards can fan out */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Replace the entire .project-frame block with this */
 .project-frame {
-    pointer-events: auto;
-    position: absolute;
-    width: 300px; /* Slightly smaller to fit the fan look */
+    position: absolute; /* Absolute within the relative track */
+    width: 300px;
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
                 opacity 0.6s ease, 
-                z-index 0s linear 0.3s; /* Delay z-index to prevent clipping */
+                z-index 0.1s step-end;
     cursor: pointer;
     user-select: none;
     overflow: hidden;
-    transform-origin: center;
+    pointer-events: none; /* Block clicks on hidden/bg cards */
 }
 
 /* --- THE COVERFLOW POSITIONS --- */
-/* Front & Center */
-/* Front & Center - Line 191 */
 .project-frame.active-card {
     opacity: 1;
     transform: translate3d(0, 0, 300px) scale(1.1);
     z-index: 10;
-    border-color: var(--accent);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    visibility: visible;
 }
 
-/* Inner Wing Left - Line 199 */
 .project-frame.left-card {
     opacity: 0.9;
-    transform: translate3d(-180px, 0, 150px) rotateY(20deg) scale(0.9);
+    transform: translate3d(-220px, 0, 100px) rotateY(25deg) scale(0.9);
     z-index: 8;
+    pointer-events: auto;
+    visibility: visible;
 }
 
-/* Inner Wing Right - Line 204 */
 .project-frame.right-card {
     opacity: 0.9;
-    transform: translate3d(180px, 0, 150px) rotateY(-20deg) scale(0.9);
+    transform: translate3d(220px, 0, 100px) rotateY(-25deg) scale(0.9);
     z-index: 8;
+    pointer-events: auto;
+    visibility: visible;
 }
 
-/* Outer Wing (Far Left/Far Right - The "Photo" Look) */
 .project-frame.far-left-card {
-    opacity: 0.6;
-    transform: translate3d(-320px, 0, 0px) rotateY(45deg) scale(0.75);
+    opacity: 0.5;
+    transform: translate3d(-400px, 0, -100px) rotateY(45deg) scale(0.75);
     z-index: 5;
+    pointer-events: auto;
     visibility: visible;
 }
 
 .project-frame.far-right-card {
-    opacity: 0.6;
-    transform: translate3d(320px, 0, 0px) rotateY(-45deg) scale(0.75);
+    opacity: 0.5;
+    transform: translate3d(400px, 0, -100px) rotateY(-45deg) scale(0.75);
     z-index: 5;
+    pointer-events: auto;
     visibility: visible;
 }
 
-/* Fully Hidden */
 .project-frame.hidden-card {
     opacity: 0;
     transform: translate3d(0, 0, -200px) scale(0.5);

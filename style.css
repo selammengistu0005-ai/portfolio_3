@@ -235,36 +235,38 @@ body {
 /* Replace your existing position classes with these */
 
 .project-frame.active-card {
-    opacity: 1;
-    transform: translate3d(0, 0, 300px) scale(1);
-    z-index: 100; /* High priority */
-    pointer-events: auto;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 300px) scale(1) !important;
+    z-index: 100 !important;
+    visibility: visible !important;
 }
 
 .project-frame.left-card {
-    opacity: 0.7;
-    /* Increased -350px to ensure it clears the center card */
-    transform: translate3d(-350px, 0, 100px) rotateY(40deg) scale(0.8);
-    z-index: 50;
+    opacity: 0.7 !important;
+    transform: translate3d(-350px, 0, 100px) rotateY(40deg) scale(0.8) !important;
+    z-index: 50 !important;
+    visibility: visible !important;
 }
 
 .project-frame.right-card {
-    opacity: 0.7;
-    /* Increased 350px */
-    transform: translate3d(350px, 0, 100px) rotateY(-40deg) scale(0.8);
-    z-index: 50;
+    opacity: 0.7 !important;
+    transform: translate3d(350px, 0, 100px) rotateY(-40deg) scale(0.8) !important;
+    z-index: 50 !important;
+    visibility: visible !important;
 }
 
 .project-frame.far-left-card {
-    opacity: 0.3;
-    transform: translate3d(-600px, 0, -100px) rotateY(60deg) scale(0.6);
-    z-index: 10;
+    opacity: 0.3 !important;
+    transform: translate3d(-600px, 0, -100px) rotateY(60deg) scale(0.6) !important;
+    z-index: 10 !important;
+    visibility: visible !important;
 }
 
 .project-frame.far-right-card {
-    opacity: 0.3;
-    transform: translate3d(600px, 0, -100px) rotateY(-60deg) scale(0.6);
-    z-index: 10;
+    opacity: 0.3 !important;
+    transform: translate3d(600px, 0, -100px) rotateY(-60deg) scale(0.6) !important;
+    z-index: 10 !important;
+    visibility: visible !important;
 }
 
 .project-frame.hidden-card {
@@ -303,7 +305,6 @@ body {
 }
 
 .project-frame:hover {
-    transform: translateY(-10px);
     border-color: var(--accent);
     box-shadow: 0 15px 30px var(--accent-glow);
 }

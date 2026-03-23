@@ -75,30 +75,35 @@ document.querySelectorAll('.project-frame, .value-container').forEach(el => {
 
 // 7. CIRCULAR PROJECT CAROUSEL (Coverflow Optimized)
 const track = document.querySelector('.carousel-track');
-const projects = Array.from(document.querySelectorAll('.project-frame'));
+let projects = Array.from(document.querySelectorAll('.project-frame')); // Changed 'const' to 'let'
 const pNextBtn = document.getElementById('next-project');
 const pPrevBtn = document.getElementById('prev-project');
-let currentIndex = 0;
+let currentIndex = 0;;
 
 /* Replace the entire updateCarousel function with this */
 const updateCarousel = () => {
     projects.forEach((card, i) => {
-        // 1. Reset all position classes
+        // 1. Reset all 3D position classes
         card.classList.remove('active-card', 'left-card', 'right-card', 'far-left-card', 'far-right-card', 'hidden-card');
 
-        // 2. Calculate relative positions in a circular array
+        // 2. Calculate relative circular distance
         const total = projects.length;
-        const dist = (i - currentIndex + total) % total;
+        let dist = i - currentIndex;
+        
+        // Wrap logic: ensures the distance is always between -2 and 2 for 5 cards
+        if (dist > total / 2) dist -= total;
+        if (dist < -total / 2) dist += total;
 
-        if (i === currentIndex) {
+        // 3. Assign classes based on circular distance
+        if (dist === 0) {
             card.classList.add('active-card');
         } else if (dist === 1) {
             card.classList.add('right-card');
-        } else if (dist === total - 1) {
+        } else if (dist === -1) {
             card.classList.add('left-card');
-        } else if (dist === 2) {
+        } else if (dist === 2 || dist === -3) { 
             card.classList.add('far-right-card');
-        } else if (dist === total - 2) {
+        } else if (dist === -2 || dist === 3) {
             card.classList.add('far-left-card');
         } else {
             card.classList.add('hidden-card');
@@ -165,18 +170,19 @@ dots.forEach((dot, i) => {
 });
 
 // 8. FINAL INITIALIZATION
+// 8. FINAL INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     
-    // REDEFINE projects here to ensure all 5 cards are captured
-    const projects = Array.from(document.querySelectorAll('.project-frame'));
+    // Assign to the global 'projects' variable instead of creating a local one
+    projects = Array.from(document.querySelectorAll('.project-frame'));
     
     // Clear the text before typing starts
     if (typingElement) typingElement.innerHTML = ""; 
     
-    setTimeout(() => {
-        // Run the carousel update with the projects found in the DOM
-        updateCarousel(); 
-        typeEffect();
-    }, 100); 
+    // Initialize the 3D positions immediately
+    updateCarousel(); 
+    
+    // Start typing effect
+    setTimeout(typeEffect, 500);
 });

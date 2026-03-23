@@ -95,18 +95,25 @@ const updateCarousel = () => {
         if (dist < -total / 2) dist += total;
 
         // 3. Assign classes based on circular distance
+        // 3. Assign classes based on circular distance
         if (dist === 0) {
             card.classList.add('active-card');
-        } else if (dist === 1) {
+            card.style.zIndex = "10";
+        } else if (dist === 1 || dist === -4) {
             card.classList.add('right-card');
-        } else if (dist === -1) {
+            card.style.zIndex = "8";
+        } else if (dist === -1 || dist === 4) {
             card.classList.add('left-card');
+            card.style.zIndex = "8";
         } else if (dist === 2 || dist === -3) { 
             card.classList.add('far-right-card');
+            card.style.zIndex = "5";
         } else if (dist === -2 || dist === 3) {
             card.classList.add('far-left-card');
+            card.style.zIndex = "5";
         } else {
             card.classList.add('hidden-card');
+            card.style.zIndex = "1";
         }
     });
 };

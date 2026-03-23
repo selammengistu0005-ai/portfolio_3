@@ -170,19 +170,18 @@ dots.forEach((dot, i) => {
 });
 
 // 8. FINAL INITIALIZATION
-// 8. FINAL INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     
-    // Assign to the global 'projects' variable instead of creating a local one
     projects = Array.from(document.querySelectorAll('.project-frame'));
     
-    // Clear the text before typing starts
-    if (typingElement) typingElement.innerHTML = ""; 
-    
-    // Initialize the 3D positions immediately
+    // 1. Calculate the 3D positions FIRST
     updateCarousel(); 
     
-    // Start typing effect
+    // 2. Now reveal the track so the user never sees the "messy" state
+    const track = document.querySelector('.carousel-track');
+    if (track) track.classList.add('is-ready');
+    
+    if (typingElement) typingElement.innerHTML = ""; 
     setTimeout(typeEffect, 500);
 });

@@ -197,41 +197,42 @@ body {
     transform-style: preserve-3d;
 }
 
+/* --- UPDATED TRACK & FRAME --- */
 .carousel-track {
     position: relative;
-    width: 300px; 
-    height: 400px;
+    width: 100%; /* Changed from 300px to 100% to give room */
+    height: 450px;
     transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0; /* Hide it initially */
-    transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.carousel-track.is-ready {
-    opacity: 1; /* Reveal it only when JS says so */
+    perspective: 1500px;
 }
 
 .project-frame {
-    position: absolute; /* Absolute within the relative track */
-    left: 50%; /* New: Move to horizontal center */
-    top: 50%;  /* New: Move to vertical center */
-    margin-left: -150px; /* New: Offset by half of card width (300px / 2) */
-    margin-top: -200px;
+    position: absolute;
+    /* This creates the "Starting Line" in the dead center */
+    left: 50%;
+    top: 50%;
     width: 300px;
+    margin-left: -150px; /* Half of width */
+    margin-top: -200px;  /* Half of height */
+    
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
                 opacity 0.6s ease, 
-                z-index 0.1s step-end;
+                z-index 0.1s;
     cursor: pointer;
     user-select: none;
     overflow: hidden;
-    pointer-events: none; /* Block clicks on hidden/bg cards */
 }
+.carousel-track.is-ready {
+    opacity: 1; /* Reveal it only when JS says so */
+}
+
 
 /* --- THE COVERFLOW POSITIONS --- */
 /* --- THE 3D COVERFLOW POSITIONS --- */

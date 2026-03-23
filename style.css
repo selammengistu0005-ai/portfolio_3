@@ -209,15 +209,18 @@ body {
     perspective: 1500px;
 }
 
-/* Replace Lines 176 - 250 with this */
 .project-frame {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 300px;
-    height: 400px; /* Explicit height */
-    margin-left: -150px;
-    margin-top: -200px;
+    /* 1. NEW SMALLER DIMENSIONS */
+    width: 260px;  /* Reduced from 300px */
+    height: 340px; /* Reduced from 400px */
+    
+    /* 2. UPDATED CENTERING (Must be half of width/height) */
+    margin-left: -130px; 
+    margin-top: -170px;
+
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);
     border-radius: 20px;
@@ -549,10 +552,9 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
     }
 }
 
-/* Keeps the logo contained and centered */
 .bot-logo-container {
     width: 100%;
-    height: 180px; /* Fixed height for the image area */
+    height: 140px; /* Reduced from 180px to match smaller frame */
     display: flex;
     align-items: center;
     justify-content: center;

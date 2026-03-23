@@ -131,13 +131,51 @@ if (pNextBtn && pPrevBtn) {
     });
 }
 
+// 6. MOCKUP SLIDER (Value Section)
+const mockups = document.querySelectorAll('.mockup-chat');
+const dots = document.querySelectorAll('.indicator .dot');
+const prevMockBtn = document.getElementById('prev-mockup');
+const nextMockBtn = document.getElementById('next-mockup');
+let currentMockup = 0;
+
+const updateMockup = (index) => {
+    mockups.forEach(m => m.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    
+    mockups[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentMockup = index;
+};
+
+if (nextMockBtn && prevMockBtn) {
+    nextMockBtn.addEventListener('click', () => {
+        let next = (currentMockup + 1) % mockups.length;
+        updateMockup(next);
+    });
+
+    prevMockBtn.addEventListener('click', () => {
+        let prev = (currentMockup - 1 + mockups.length) % mockups.length;
+        updateMockup(prev);
+    });
+}
+
+// Allow clicking the dots directly
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => updateMockup(i));
+});
+
 // 8. FINAL INITIALIZATION
-// Replace your existing Line 116-121 with this:
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     
-    // Small delay ensures the browser has calculated the 3D perspective
+    // REDEFINE projects here to ensure all 5 cards are captured
+    const projects = Array.from(document.querySelectorAll('.project-frame'));
+    
+    // Clear the text before typing starts
+    if (typingElement) typingElement.innerHTML = ""; 
+    
     setTimeout(() => {
+        // Run the carousel update with the projects found in the DOM
         updateCarousel(); 
         typeEffect();
     }, 100); 

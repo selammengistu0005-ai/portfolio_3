@@ -80,18 +80,26 @@ const pNextBtn = document.getElementById('next-project');
 const pPrevBtn = document.getElementById('prev-project');
 let currentIndex = 0;
 
+/* Replace the entire updateCarousel function with this */
 const updateCarousel = () => {
     projects.forEach((card, i) => {
-        // 1. Reset all classes
-        card.classList.remove('active-card', 'left-card', 'right-card', 'hidden-card');
+        // 1. Reset all position classes
+        card.classList.remove('active-card', 'left-card', 'right-card', 'far-left-card', 'far-right-card', 'hidden-card');
 
-        // 2. Assign positions based on index
+        // 2. Calculate relative positions in a circular array
+        const total = projects.length;
+        const dist = (i - currentIndex + total) % total;
+
         if (i === currentIndex) {
             card.classList.add('active-card');
-        } else if (i === (currentIndex - 1 + projects.length) % projects.length) {
-            card.classList.add('left-card');
-        } else if (i === (currentIndex + 1) % projects.length) {
+        } else if (dist === 1) {
             card.classList.add('right-card');
+        } else if (dist === total - 1) {
+            card.classList.add('left-card');
+        } else if (dist === 2) {
+            card.classList.add('far-right-card');
+        } else if (dist === total - 2) {
+            card.classList.add('far-left-card');
         } else {
             card.classList.add('hidden-card');
         }

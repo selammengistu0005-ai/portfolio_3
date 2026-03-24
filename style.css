@@ -192,6 +192,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.frame-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: calc(100% - 45px); /* Subtracts header height */
+    overflow-y: auto; /* Adds a scrollbar INSIDE the card if text is too long */
 }
 
 .carousel-track {

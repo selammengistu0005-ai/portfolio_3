@@ -115,6 +115,9 @@ body {
     padding: 40px;
     border-radius: 30px;
     border: 1px solid var(--glass-border);
+    opacity: 0; 
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .mockup-chat {
@@ -150,7 +153,7 @@ body {
 .msg.bot {
     background: var(--accent);
     color: white;
-    margin-left: auto;
+    align-self: flex-end;
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
@@ -173,108 +176,90 @@ body {
     font-weight: bold;
 }
 
-/* 4. PROJECT GALLERY - REFINED 3D */
+/* 4. PROJECT GALLERY - REFINED 3D CAROUSEL */
 .carousel-stage {
     position: relative;
-    height: 550px; /* Increased height for the 3D depth */
+    height: 550px;
+    width: 100%;
+    max-width: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    perspective: 1200px; /* Defined here for better control */
-    margin: 40px 0;
-    overflow: visible !important;
-    max-width: 100%; /* Ensure it takes full width of the screen */
-    width: 100vw;
+    perspective: 1500px;
+    margin: 40px auto;
+    overflow: visible;
 }
 
 .carousel-container {
     width: 100%;
-    perspective: 2000px; /* Increased for a more dramatic 3D effect */
-    overflow: visible !important;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.frame-content {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    height: calc(100% - 45px); /* Subtracts header height */
-    overflow-y: auto; /* Adds a scrollbar INSIDE the card if text is too long */
+    transform-style: preserve-3d;
 }
 
 .carousel-track {
     position: relative;
-    width: 100%; /* Changed from 0 to 100% */
+    width: 300px; /* Base width of the cards */
     height: 400px;
     transform-style: preserve-3d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .project-frame {
     position: absolute;
     width: 300px;
     height: 400px;
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    /* This is the secret sauce: Always keep the anchor at the center */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-    transform-style: preserve-3d;
+    top: 0;
+    left: 0;
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow);
-    overflow: hidden; /* Keeps content inside the glass */
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+    overflow: hidden;
 }
 
-/* 3D States: Notice how we keep translate(-50%, -50%) in EVERY class */
+/* 3D State Logic - Corrected for "Spread" */
 .active-card {
-    transform: translate(-50%, -50%) translateZ(250px) rotateY(0deg);
-    z-index: 100 !important;
+    transform: translate3d(0, 0, 250px) rotateY(0deg);
+    z-index: 100;
     opacity: 1;
 }
 
 .left-card {
-    transform: translate(-160%, -50%) translateZ(-200px) rotateY(45deg) !important;
-    z-index: 50 !important;
+    transform: translate3d(-320px, 0, -150px) rotateY(40deg);
+    z-index: 50;
     opacity: 0.6;
 }
 
 .right-card {
-    transform: translate(60%, -50%) translateZ(-200px) rotateY(-45deg) !important;
-    z-index: 50 !important;
+    transform: translate3d(320px, 0, -150px) rotateY(-40deg);
+    z-index: 50;
     opacity: 0.6;
 }
 
-/* Push the "far" cards even further so they don't clip into the visible ones */
 .far-left-card {
-    transform: translate(-220%, -50%) translateZ(-450px) rotateY(70deg) !important;
+    transform: translate3d(-550px, 0, -400px) rotateY(60deg);
+    z-index: 10;
     opacity: 0.15;
-    z-index: 10 !important;
 }
 
 .far-right-card {
-    transform: translate(120%, -50%) translateZ(-450px) rotateY(-70deg) !important;
+    transform: translate3d(550px, 0, -400px) rotateY(-60deg);
+    z-index: 10;
     opacity: 0.15;
-    z-index: 10 !important;
 }
 
 .hidden-card {
     opacity: 0;
+    transform: translate3d(0, 0, -1000px);
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.5);
 }
 
+/* Navigation Buttons */
 .carousel-nav-btn {
     position: absolute;
     top: 50%;
@@ -286,43 +271,23 @@ body {
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 100;
+    z-index: 200;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
     backdrop-filter: var(--glass-blur);
+    transition: 0.3s;
 }
 
-.carousel-nav-btn.prev { left: -120px; }
-.carousel-nav-btn.next { right: -120px; }
+.carousel-nav-btn.prev { left: 20px; }
+.carousel-nav-btn.next { right: 20px; }
 
 .carousel-nav-btn:hover {
     background: var(--accent);
     color: white;
-    box-shadow: 0 0 20px var(--accent-glow);
 }
 
-.project-frame:hover {
-    border-color: var(--accent);
-    box-shadow: 0 15px 30px var(--accent-glow);
-}
-
-.frame-header {
-    background: rgba(0,0,0,0.03);
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.frame-btn {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-}
-
-/* 5. THEME TOGGLE (SVG) */
+/* 5. THEME TOGGLE */
 .fixed-bottom-left {
     position: fixed;
     bottom: 30px;
@@ -342,12 +307,6 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 10px;
-    color: var(--text);
-}
-
-.sun-icon, .moon-icon { 
-    opacity: 0.5;
-    transition: opacity 0.3s;
 }
 
 .ball {
@@ -361,263 +320,49 @@ body {
 }
 
 body.dark-mode .ball { transform: translateX(32px); }
-body.dark-mode .moon-icon { opacity: 1; color: #f1f2f6; }
-body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
-
-
-.chip {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-    text-decoration: none;
-}
-
-/* 2. THE "ON" STATE (What you already have) */
-.fade-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* 7. INTERACTIVE MOCKUP SLIDER */
-.mockup-slider {
-    position: relative;
-    width: 100%;
-    min-height: 320px; /* Ensures space for the chat + buttons */
-    display: flex;
-    flex-direction: column;
-}
-
-.mockup-chat {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(20px);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mockup-chat.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    position: relative; /* Takes up space so the container knows its height */
-}
-
-/* Specific styling for the E-learning Avatar */
-.user-avatar.edu {
-    background: var(--accent);
-    background-image: linear-gradient(45deg, #6c5ce7, #a29bfe);
-}
-
-/* Slider Controls */
-.slider-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.nav-btn {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--text);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: var(--glass-blur);
-}
-
-.nav-btn:hover {
-    background: var(--accent);
-    color: white;
-    transform: scale(1.1);
-}
-
-/* Progress Dots */
-.indicator {
-    display: flex;
-    gap: 8px;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    background: var(--toggle-bg);
-    border-radius: 50%;
-    transition: 0.4s;
-}
-
-.dot.active {
-    background: var(--accent);
-    width: 24px;
-    border-radius: 10px;
-}
-
-/* 8. CASE STUDY ANIMATIONS (Fixed) */
-.case-study {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out, margin-top 0.4s ease;
-}
-
-.case-study.active {
-    max-height: 500px;
-    margin-top: 15px;
-    padding-bottom: 10px;
-}
-
-/* Add this to ensure messages stack vertically inside the slider */
-.mockup-body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* This ensures the bot message always stays on the right */
-.msg.bot {
-    align-self: flex-end; 
-}
-
-.value-container {
-    opacity: 0; /* Add this line */
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Add this line */
-}
-
-/* 9. BUTTON & CASE STUDY STYLING */
-.toggle-case-study {
-    display: inline-block;
-    background: var(--accent);
-    color: white !important;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px var(--accent-glow);
-}
-
-.toggle-case-study:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--accent-glow);
-    filter: brightness(1.1);
-}
 
 /* 6. RESPONSIVENESS */
 @media (max-width: 768px) {
-    .value-section {
-        width: 100%;
-        padding: 20px 10px; /* Tighten the edges */
-    }
-
     .value-container {
-        display: flex;
-        flex-direction: column; /* This forces the vertical stack */
-        gap: 30px;
+        grid-template-columns: 1fr;
         padding: 20px;
         text-align: center;
-        align-items: center; /* Centers the mockup and list */
     }
-
-    .mockup-slider {
-        width: 100%;
-        min-height: 400px; /* Give it enough height to stack messages */
-    }
-
-    .benefit-list li {
-        text-align: left; /* Keep text readable while container is centered */
-        font-size: 0.9rem;
-    }
-}
-
-.bot-logo-container {
-    width: 100%;
-    height: 140px; /* Reduced from 180px to match smaller frame */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.05);
-    overflow: hidden;
-}
-
-.bot-logo {
-    max-width: 90%;
-    max-height: 80%;
-    object-fit: contain;
-}
-
-/* 10. MOBILE & TABLET 3D OPTIMIZATION */
-
-/* Tablets (iPad/Portrait) */
-@media (max-width: 1024px) {
-    .project-frame.left-card {
-        transform: translate3d(-220px, 0, 80px) rotateY(35deg) scale(0.75) !important;
-    }
-    .project-frame.right-card {
-        transform: translate3d(220px, 0, 80px) rotateY(-35deg) scale(0.75) !important;
-    }
-    .carousel-nav-btn.prev { left: 20px; }
-    .carousel-nav-btn.next { right: 20px; }
-}
-/* Phones (iPhone/Android) */
-@media (max-width: 600px) {
     .carousel-stage {
-        height: 400px !important; 
-        perspective: 1000px !important;
+        height: 450px;
     }
-
+    .carousel-track {
+        width: 240px;
+    }
     .project-frame {
-        width: 220px !important;  /* Slightly larger for readability */
-        height: 320px !important;
-        /* We rely on the base translate(-50%, -50%) from the main class */
+        width: 240px;
+        height: 340px;
     }
-
-    .active-card {
-        transform: translate(-50%, -50%) translateZ(150px) !important;
-    }
-
-    .left-card {
-        /* Use percentages to keep it relative to the center anchor */
-        transform: translate(-115%, -50%) translateZ(-100px) rotateY(30deg) scale(0.8) !important;
-        opacity: 0.5 !important;
-    }
-
-    .right-card {
-        transform: translate(15%, -50%) translateZ(-100px) rotateY(-30deg) scale(0.8) !important;
-        opacity: 0.5 !important;
-    }
-
-    /* Hide extreme cards on small screens to prevent clutter */
-    .far-left-card, .far-right-card, .hidden-card {
-        display: none !important;
-    }
-
-    /* Position buttons inside the "safe zone" of the mobile screen */
-    .carousel-nav-btn.prev { left: 10px !important; }
-    .carousel-nav-btn.next { right: 10px !important; }
-    
-    .carousel-nav-btn {
-        width: 45px !important;
-        height: 45px !important;
-        background: var(--accent) !important;
-        color: white !important;
-    }
+    .left-card { transform: translate3d(-180px, 0, -100px) rotateY(30deg) scale(0.85); }
+    .right-card { transform: translate3d(180px, 0, -100px) rotateY(-30deg) scale(0.85); }
+    .far-left-card, .far-right-card { display: none; }
 }
+
+/* 7. OTHER STYLES (Mockups, Case Studies, etc.) */
+.mockup-slider { position: relative; width: 100%; min-height: 320px; }
+.mockup-chat { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; visibility: hidden; transition: 0.5s; }
+.mockup-chat.active { opacity: 1; visibility: visible; position: relative; }
+
+.case-study { max-height: 0; overflow: hidden; transition: 0.4s ease-out; }
+.case-study.active { max-height: 500px; margin-top: 15px; }
+
+.toggle-case-study {
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.fade-in { opacity: 1 !important; transform: translateY(0) !important; }
+.chip { background: var(--accent); color: white; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; }
+.bot-logo-container { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); }
+.bot-logo { max-width: 90%; max-height: 80%; object-fit: contain; }

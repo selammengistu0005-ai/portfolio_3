@@ -111,6 +111,33 @@ const updateCarousel = () => {
     });
 };
 
+// Add Swipe Support for Mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, { passive: true });
+
+const handleSwipe = () => {
+    const swipeThreshold = 50;
+    if (touchEndX < touchStartX - swipeThreshold) {
+        // Swiped Left -> Next Card
+        currentIndex = (currentIndex + 1) % projects.length;
+        updateCarousel();
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+        // Swiped Right -> Previous Card
+        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+        updateCarousel();
+    }
+};
+
 // Click-to-Focus Fix
 projects.forEach((card, i) => {
     card.addEventListener('click', (e) => {
@@ -134,7 +161,8 @@ if (pNextBtn && pPrevBtn) {
 
     pPrevBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+        const total = projects.length;
+        currentIndex = (currentIndex - 1 + total) % total;
         updateCarousel();
     });
 }
@@ -176,15 +204,18 @@ dots.forEach((dot, i) => {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     
+    // Refresh the projects list to ensure we have the DOM elements
     projects = Array.from(document.querySelectorAll('.project-frame'));
     
-    // 1. Calculate the 3D positions FIRST
+    // Initialize the states
     updateCarousel(); 
+    updateMockup(0); // Ensure the first mockup is active
     
-    // 2. Now reveal the track so the user never sees the "messy" state
-    const track = document.querySelector('.carousel-track');
-    if (track) track.classList.add('is-ready');
+    const carouselTrack = document.querySelector('.carousel-track');
+    if (carouselTrack) carouselTrack.style.opacity = "1";
     
-    if (typingElement) typingElement.innerHTML = ""; 
-    setTimeout(typeEffect, 500);
+    if (typingElement) {
+        typingElement.innerHTML = ""; 
+        setTimeout(typeEffect, 500);
+    }
 });

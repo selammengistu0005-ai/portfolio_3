@@ -321,6 +321,37 @@ body {
 
 body.dark-mode .ball { transform: translateX(32px); }
 
+/* SECTION 7.1 ARROW STYLING */
+
+/* 1. Base style for the arrow SVG */
+.list-arrow {
+    width: 14px;             /* Define a precise width */
+    height: 14px;            /* Precise height */
+    color: var(--accent);    /* Dynamically use your accent color */
+    margin-right: 12px;      /* Give professional breathing room from the text */
+    flex-shrink: 0;          /* Prevent the SVG from squashing */
+    transition: transform 0.3s ease; /* Subtle hover animation prep */
+}
+
+/* 2. Vertically align the list item content properly */
+.benefit-list li {
+    display: flex;           /* Use flexbox to align the SVG and text horizontally */
+    align-items: center;     /* Center them perfectly vertically */
+    margin-bottom: 15px;      /* Standard spacing between list items */
+    position: relative;
+    padding-left: 0;          /* Reset padding so the SVG handles spacing */
+}
+
+/* 3. Remove the old text-based pseudo-element if it exists from earlier versions */
+.benefit-list li::before {
+    content: none !important;
+}
+
+/* Optional "Nudge" Animation on Hover - Purely for polish */
+.benefit-list li:hover .list-arrow {
+    transform: translateX(3px); /* Gently move the arrow right on hover */
+}
+
 /* 6. RESPONSIVENESS */
 @media (max-width: 768px) {
     .value-container {

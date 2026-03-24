@@ -186,6 +186,11 @@ body {
     overflow: visible; 
 }
 
+.carousel-container {
+    perspective: 1500px; /* This creates the 3D 'room' depth */
+    overflow: visible;   /* CRITICAL: Allows 3D cards to swing 'out' of the container */
+}
+
 .carousel-track {
     position: relative;
     width: 100%;
@@ -194,6 +199,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
 }
 
 .project-frame {
@@ -211,33 +217,33 @@ body {
     backface-visibility: hidden;
 }
 
-.project-frame.active-card {
+/* Side Cards (The 'Wings') */
+.left-card {
+    transform: translate3d(-70%, 0, -250px) rotateY(45deg);
+    opacity: 0.6;
+}
+
+.right-card {
+    transform: translate3d(70%, 0, -250px) rotateY(-45deg);
+    opacity: 0.6;
+}
+
+/* Far Side Cards (Deeper in the background) */
+.far-left-card {
+    transform: translate3d(-120%, 0, -500px) rotateY(60deg);
+    opacity: 0.2;
+}
+
+.far-right-card {
+    transform: translate3d(120%, 0, -500px) rotateY(-60deg);
+    opacity: 0.2;
+}
+
+/* Active Card (Pushing forward) */
+.active-card {
+    transform: translate3d(0, 0, 100px) rotateY(0deg);
     opacity: 1;
-    /* Pushes card 250px toward the user */
-    transform: translate3d(0, 0, 250px) scale(1);
-    z-index: 10; 
-}
-
-.project-frame.left-card {
-    opacity: 0.6;
-    /* Tucks card 100px away from the user and rotates it */
-    transform: translate3d(-320px, 0, -100px) rotateY(35deg) scale(0.8);
-    z-index: 5;
-}
-
-.project-frame.right-card {
-    opacity: 0.6;
-    transform: translate3d(320px, 0, -100px) rotateY(-35deg) scale(0.8);
-    z-index: 5;
-}
-
-.project-frame.hidden-card, 
-.project-frame.far-left-card, 
-.project-frame.far-right-card {
-    opacity: 0;
-    transform: translate3d(0, 0, -400px) scale(0.5);
-    pointer-events: none;
-    visibility: hidden;
+    z-index: 100;
 }
 
 .carousel-nav-btn {

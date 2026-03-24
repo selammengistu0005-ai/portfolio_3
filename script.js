@@ -81,12 +81,11 @@ const pPrevBtn = document.getElementById('prev-project');
 let currentIndex = 0;;
 
 /* Replace the entire updateCarousel function with this */
-/* Replace your updateCarousel logic around Line 90 */
 const updateCarousel = () => {
     const total = projects.length;
 
     projects.forEach((card, i) => {
-        // 1. Reset all 3D classes
+        // 1. Reset all 3D classes (Clean slate)
         card.classList.remove('active-card', 'left-card', 'right-card', 'far-left-card', 'far-right-card', 'hidden-card');
 
         // 2. Calculate shortest distance for circular loop
@@ -94,28 +93,23 @@ const updateCarousel = () => {
         if (dist > total / 2) dist -= total;
         if (dist < -total / 2) dist += total;
 
-        // 3. Set physical stacking (Z-Index)
-        // We use 100 as base so it's always above background elements
-        const absDist = Math.abs(dist);
-        card.style.zIndex = 100 - absDist;
-
-        // 4. Apply 3D perspective classes
+        // 3. Apply 3D perspective classes
+        // Note: We removed the manual .style.zIndex here because CSS !important handles it now
         if (dist === 0) {
             card.classList.add('active-card');
-            card.style.zIndex = 110; // Ensure center is ALWAYS on top
-        } else if (dist === 1 || (dist === -(total - 1) && total > 2)) {
+        } else if (dist === 1 || (dist === -(total - 1) && total > 1)) {
             card.classList.add('right-card');
-        } else if (dist === -1 || (dist === (total - 1) && total > 2)) {
+        } else if (dist === -1 || (dist === (total - 1) && total > 1)) {
             card.classList.add('left-card');
-        } else if (dist === 2 || (dist === -(total - 2) && total > 4)) {
+        } else if (dist === 2 || (dist === -(total - 2) && total > 2)) {
             card.classList.add('far-right-card');
-        } else if (dist === -2 || (dist === (total - 2) && total > 4)) {
+        } else if (dist === -2 || (dist === (total - 2) && total > 2)) {
             card.classList.add('far-left-card');
         } else {
             card.classList.add('hidden-card');
         }
 
-        // 5. Accessibility: Hide non-active cards from Screen Readers
+        // 4. Accessibility: Hide non-active cards from Screen Readers
         card.setAttribute('aria-hidden', dist !== 0);
     });
 };
@@ -212,12 +206,23 @@ dots.forEach((dot, i) => {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     
-    // Refresh the projects list (Assigning to the global variable, not redeclaring)
+    // 1. Grab the frames
     projects = Array.from(document.querySelectorAll('.project-frame'));
     
-    // Initialize the states
+    // 2. Attach click-to-focus listeners NOW that the array is populated
+    projects.forEach((card, i) => {
+        card.addEventListener('click', (e) => {
+            if (currentIndex === i) return;
+            e.preventDefault();
+            e.stopPropagation();
+            currentIndex = i;
+            updateCarousel();
+        });
+    });
+
+    // 3. Initialize the states
     updateCarousel(); 
-    updateMockup(0); 
+    updateMockup(0);
     
     const carouselTrack = document.querySelector('.carousel-track');
     if (carouselTrack) {

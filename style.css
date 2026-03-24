@@ -176,56 +176,43 @@ body {
 /* 4. PROJECT GALLERY - REFINED 3D */
 .carousel-stage {
     position: relative;
-    width: 100%;
-    height: 600px; 
+    width: 100vw; /* Force it to use full viewport width to prevent side-clipping */
+    max-width: 100%;
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    perspective: 1200px; /* Stronger perspective for better depth */
-    margin: 40px auto;
-    overflow: visible; 
+    overflow: visible !important; /* CRITICAL: Allows cards to exist outside the center-line */
 }
 
 .carousel-container {
-    perspective: 1500px; /* This creates the 3D 'room' depth */
-    overflow: visible;   /* CRITICAL: Allows 3D cards to swing 'out' of the container */
+    width: 100%;
+    perspective: 2000px; /* Increased for a more dramatic 3D effect */
+    overflow: visible !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel-track {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 0; /* All cards start at this center point */
+    height: 380px;
     transform-style: preserve-3d;
     display: flex;
-    align-items: center;
     justify-content: center;
-    transform-style: preserve-3d;
+    align-items: center;
 }
 
 .project-frame {
-    position: absolute;
-    width: 280px;  
-    height: 380px;
-    background: var(--card-bg);
-    backdrop-filter: var(--glass-blur);
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    /* Smoother timing function for the 'swing' effect */
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
-    cursor: pointer;
-    overflow: hidden;
-    backface-visibility: hidden;
-}
-
-/* Side Cards (The 'Wings') */
-.left-card {
-    transform: translate3d(-70%, 0, -250px) rotateY(45deg);
-    opacity: 0.6;
-}
-
-.right-card {
-    transform: translate3d(70%, 0, -250px) rotateY(-45deg);
-    opacity: 0.6;
+    position: absolute; /* Allows them to overlap and spread via JS */
+    width: 300px;
+    height: 400px;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* This ensures they center themselves on the 'zero-width' track */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
 }
 
 /* Far Side Cards (Deeper in the background) */
@@ -239,11 +226,22 @@ body {
     opacity: 0.2;
 }
 
-/* Active Card (Pushing forward) */
 .active-card {
-    transform: translate3d(0, 0, 100px) rotateY(0deg);
-    opacity: 1;
+    transform: translate3d(-50%, -50%, 200px) rotateY(0deg); /* Pushes toward user */
     z-index: 100;
+    opacity: 1;
+}
+
+.left-card {
+    transform: translate3d(-130%, -50%, -200px) rotateY(45deg); /* Pushed left and back */
+    z-index: 50;
+    opacity: 0.6;
+}
+
+.right-card {
+    transform: translate3d(30%, -50%, -200px) rotateY(-45deg); /* Pushed right and back */
+    z-index: 50;
+    opacity: 0.6;
 }
 
 .carousel-nav-btn {

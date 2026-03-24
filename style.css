@@ -583,16 +583,25 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
 }
 /* Phones (iPhone/Android) */
 @media (max-width: 600px) {
+    .carousel-stage + h2, 
+    h2 { 
+        font-size: 1.4rem !important; 
+        text-align: center;
+        padding: 0 20px;
+    }
+    
     .carousel-stage {
         height: 380px !important; /* Shorter for mobile */
         perspective: 800px !important; /* Makes 3D feel more natural on small glass */
     }
 
     .project-frame {
-        width: 190px !important;  /* Much smaller for mobile */
+        width: 190px !important;  /* Mobile size */
         height: 270px !important;
-        margin-left: -95px !important; /* Must be half of 190 */
-        margin-top: -135px !important; /* Must be half of 270 */
+        margin-left: -95px !important; /* EXACTLY half of 190 */
+        margin-top: -135px !important; /* EXACTLY half of 270 */
+        left: 50% !important;
+        top: 50% !important;
     }
 
     .project-frame.active-card {

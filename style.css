@@ -176,8 +176,6 @@ body {
 /* 4. PROJECT GALLERY - REFINED 3D */
 .carousel-stage {
     position: relative;
-    width: 100%;
-    max-width: 1200px;
     height: 550px; /* Increased height for the 3D depth */
     display: flex;
     align-items: center;
@@ -185,6 +183,8 @@ body {
     perspective: 1200px; /* Defined here for better control */
     margin: 40px 0;
     overflow: visible !important;
+    max-width: 100%; /* Ensure it takes full width of the screen */
+    width: 100vw;
 }
 
 .carousel-container {
@@ -245,26 +245,27 @@ body {
 }
 
 .left-card {
-    transform: translate(-140%, -50%) translateZ(-150px) rotateY(45deg);
+    transform: translate(-160%, -50%) translateZ(-200px) rotateY(45deg) !important;
     z-index: 50 !important;
     opacity: 0.6;
 }
 
 .right-card {
-    transform: translate(40%, -50%) translateZ(-150px) rotateY(-45deg);
+    transform: translate(60%, -50%) translateZ(-200px) rotateY(-45deg) !important;
     z-index: 50 !important;
     opacity: 0.6;
 }
 
+/* Push the "far" cards even further so they don't clip into the visible ones */
 .far-left-card {
-    transform: translate(-190%, -50%) translateZ(-400px) rotateY(70deg);
-    opacity: 0.2;
+    transform: translate(-220%, -50%) translateZ(-450px) rotateY(70deg) !important;
+    opacity: 0.15;
     z-index: 10 !important;
 }
 
 .far-right-card {
-    transform: translate(90%, -50%) translateZ(-400px) rotateY(-70deg);
-    opacity: 0.2;
+    transform: translate(120%, -50%) translateZ(-450px) rotateY(-70deg) !important;
+    opacity: 0.15;
     z-index: 10 !important;
 }
 

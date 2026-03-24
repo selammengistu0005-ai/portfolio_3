@@ -176,13 +176,15 @@ body {
 /* 4. PROJECT GALLERY - REFINED 3D */
 .carousel-stage {
     position: relative;
-    width: 100vw; /* Force it to use full viewport width to prevent side-clipping */
-    max-width: 100%;
-    height: 600px;
+    width: 100%;
+    max-width: 1200px;
+    height: 550px; /* Increased height for the 3D depth */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible !important; /* CRITICAL: Allows cards to exist outside the center-line */
+    perspective: 1200px; /* Defined here for better control */
+    margin: 40px 0;
+    overflow: visible !important;
 }
 
 .carousel-container {
@@ -209,8 +211,8 @@ body {
 
 .carousel-track {
     position: relative;
-    width: 0; /* All cards start at this center point */
-    height: 380px;
+    width: 100%; /* Changed from 0 to 100% */
+    height: 400px;
     transform-style: preserve-3d;
     display: flex;
     justify-content: center;
@@ -218,43 +220,58 @@ body {
 }
 
 .project-frame {
-    position: absolute; /* Allows them to overlap and spread via JS */
+    position: absolute;
     width: 300px;
     height: 400px;
     transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    /* This ensures they center themselves on the 'zero-width' track */
+    /* This is the secret sauce: Always keep the anchor at the center */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%); 
+    transform-style: preserve-3d;
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    overflow: hidden; /* Keeps content inside the glass */
 }
 
-/* Far Side Cards (Deeper in the background) */
-.far-left-card {
-    transform: translate3d(-120%, 0, -500px) rotateY(60deg);
-    opacity: 0.2;
-}
-
-.far-right-card {
-    transform: translate3d(120%, 0, -500px) rotateY(-60deg);
-    opacity: 0.2;
-}
-
+/* 3D States: Notice how we keep translate(-50%, -50%) in EVERY class */
 .active-card {
-    transform: translate3d(-50%, -50%, 200px) rotateY(0deg); /* Pushes toward user */
-    z-index: 100;
+    transform: translate(-50%, -50%) translateZ(250px) rotateY(0deg);
+    z-index: 100 !important;
     opacity: 1;
 }
 
 .left-card {
-    transform: translate3d(-130%, -50%, -200px) rotateY(45deg); /* Pushed left and back */
-    z-index: 50;
+    transform: translate(-140%, -50%) translateZ(-150px) rotateY(45deg);
+    z-index: 50 !important;
     opacity: 0.6;
 }
 
 .right-card {
-    transform: translate3d(30%, -50%, -200px) rotateY(-45deg); /* Pushed right and back */
-    z-index: 50;
+    transform: translate(40%, -50%) translateZ(-150px) rotateY(-45deg);
+    z-index: 50 !important;
     opacity: 0.6;
+}
+
+.far-left-card {
+    transform: translate(-190%, -50%) translateZ(-400px) rotateY(70deg);
+    opacity: 0.2;
+    z-index: 10 !important;
+}
+
+.far-right-card {
+    transform: translate(90%, -50%) translateZ(-400px) rotateY(-70deg);
+    opacity: 0.2;
+    z-index: 10 !important;
+}
+
+.hidden-card {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.5);
 }
 
 .carousel-nav-btn {
@@ -561,57 +578,45 @@ body:not(.dark-mode) .sun-icon { opacity: 1; color: #f39c12; }
 }
 /* Phones (iPhone/Android) */
 @media (max-width: 600px) {
-    .carousel-stage + h2, 
-    h2 { 
-        font-size: 1.4rem !important; 
-        text-align: center;
-        padding: 0 20px;
-    }
-    
     .carousel-stage {
-        height: 380px !important; /* Shorter for mobile */
-        perspective: 800px !important; /* Makes 3D feel more natural on small glass */
+        height: 400px !important; 
+        perspective: 1000px !important;
     }
 
     .project-frame {
-        width: 190px !important;  /* Mobile size */
-        height: 270px !important;
-        margin-left: -95px !important; /* EXACTLY half of 190 */
-        margin-top: -135px !important; /* EXACTLY half of 270 */
-        left: 50% !important;
-        top: 50% !important;
+        width: 220px !important;  /* Slightly larger for readability */
+        height: 320px !important;
+        /* We rely on the base translate(-50%, -50%) from the main class */
     }
 
-    .project-frame.active-card {
-        transform: translate3d(0, 0, 120px) scale(1) !important;
+    .active-card {
+        transform: translate(-50%, -50%) translateZ(150px) !important;
     }
 
-    .project-frame.left-card {
-        /* Move it only 120px so it stays visible on the screen edge */
-        transform: translate3d(-120px, 0, 0px) rotateY(35deg) scale(0.7) !important;
+    .left-card {
+        /* Use percentages to keep it relative to the center anchor */
+        transform: translate(-115%, -50%) translateZ(-100px) rotateY(30deg) scale(0.8) !important;
         opacity: 0.5 !important;
     }
 
-    .project-frame.right-card {
-        transform: translate3d(120px, 0, 0px) rotateY(-35deg) scale(0.7) !important;
+    .right-card {
+        transform: translate(15%, -50%) translateZ(-100px) rotateY(-30deg) scale(0.8) !important;
         opacity: 0.5 !important;
     }
 
-    /* Keep the far cards hidden so the user doesn't get confused */
-    .project-frame.far-left-card, 
-    .project-frame.far-right-card,
-    .project-frame.hidden-card {
+    /* Hide extreme cards on small screens to prevent clutter */
+    .far-left-card, .far-right-card, .hidden-card {
         display: none !important;
     }
 
-    /* Move nav buttons inside the screen so they are clickable */
-    .carousel-nav-btn.prev { left: 15px !important; }
-    .carousel-nav-btn.next { right: 15px !important; }
+    /* Position buttons inside the "safe zone" of the mobile screen */
+    .carousel-nav-btn.prev { left: 10px !important; }
+    .carousel-nav-btn.next { right: 10px !important; }
     
     .carousel-nav-btn {
-        width: 42px !important;
-        height: 42px !important;
-        background: var(--accent) !important; /* Make buttons easier to see on mobile */
+        width: 45px !important;
+        height: 45px !important;
+        background: var(--accent) !important;
         color: white !important;
     }
 }

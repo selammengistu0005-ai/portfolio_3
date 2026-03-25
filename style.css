@@ -157,23 +157,23 @@ body {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* --- UNIFIED VALUE SECTION ARROWS --- */
+/* --- FINAL FIX: VALUE SECTION ARROWS --- */
 .benefit-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 20px 0 0 0 !important;
 }
 
 .benefit-list li {
     display: flex !important;
-    align-items: flex-start !important; /* Keeps arrow aligned with the first line of text */
-    gap: 14px !important;              /* Clean spacing between SVG and text */
-    margin-bottom: 18px;
+    align-items: flex-start !important; /* Aligns arrow to the top line of text */
+    gap: 12px !important;               /* Creates physical space between arrow and text */
+    margin-bottom: 18px !important;
+    padding-left: 0 !important;         /* Kills the old 25px padding causing the gap */
     position: relative;
-    padding-left: 0 !important;        /* Prevents old padding from pushing text */
 }
 
-/* Hard-kill the old text arrow "→" */
+/* This kills the old "→" text character for good */
 .benefit-list li::before {
     content: none !important;
     display: none !important;
@@ -183,20 +183,21 @@ body {
     width: 16px !important;
     height: 16px !important;
     color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 4px; /* Adjusts the arrow to sit perfectly next to the first line */
+    flex-shrink: 0;           /* Stops arrow from squishing on small screens */
+    margin-top: 4px !important; /* Vertically aligns arrow with the text */
     transition: transform 0.3s ease;
+    display: block !important;
 }
 
 .benefit-list li strong {
     color: var(--accent);
-    margin-right: 5px;
-    display: inline-block;
+    display: inline;
+    margin-right: 4px;
 }
 
-/* Subtle Hover Animation */
+/* Professional Hover Nudge */
 .benefit-list li:hover .list-arrow {
-    transform: translateX(4px);
+    transform: translateX(5px);
 }
 
 /* 4. PROJECT GALLERY - REFINED 3D CAROUSEL */

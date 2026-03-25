@@ -164,13 +164,41 @@ body {
     margin: 20px 0 0 0 !important;
 }
 
+/* --- UPDATED: VALUE SECTION ALIGNMENT --- */
 .benefit-list li {
     display: flex !important;
-    align-items: flex-start !important; /* Aligns arrow to the top line of text */
-    gap: 12px !important;               /* Creates physical space between arrow and text */
-    margin-bottom: 18px !important;
-    padding-left: 0 !important;         /* Kills the old 25px padding causing the gap */
-    position: relative;
+    align-items: flex-start !important; 
+    gap: 15px !important;              /* Physical gap between arrow and text block */
+    margin-bottom: 22px !important;
+    padding-left: 0 !important;
+}
+
+/* This targets the new wrapper we added in HTML */
+.benefit-content {
+    display: flex;
+    flex-direction: column;           /* Stack label above description for better mobile feel */
+    gap: 2px;
+    text-align: left;                 /* Force text to stay left */
+}
+
+.benefit-label {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.benefit-desc {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.list-arrow {
+    width: 18px !important;           /* Slightly larger for better visibility */
+    height: 18px !important;
+    color: var(--accent);
+    flex-shrink: 0;                   /* Prevent arrow from squishing */
+    margin-top: 3px !important;       /* Align perfectly with the first line */
 }
 
 /* This kills the old "→" text character for good */
@@ -179,21 +207,6 @@ body {
     display: none !important;
 }
 
-.list-arrow {
-    width: 16px !important;
-    height: 16px !important;
-    color: var(--accent);
-    flex-shrink: 0;           /* Stops arrow from squishing on small screens */
-    margin-top: 4px !important; /* Vertically aligns arrow with the text */
-    transition: transform 0.3s ease;
-    display: block !important;
-}
-
-.benefit-list li strong {
-    color: var(--accent);
-    display: inline;
-    margin-right: 4px;
-}
 
 /* Professional Hover Nudge */
 .benefit-list li:hover .list-arrow {

@@ -157,9 +157,43 @@ body {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
+/* --- PROFESSIONAL ARROW & TEXT ALIGNMENT --- */
 .benefit-list {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+.benefit-list li {
+    display: flex;
+    align-items: flex-start; /* Aligns arrow with the first line of text */
+    gap: 12px;               /* Precise spacing between arrow and text */
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.list-arrow {
+    width: 16px;
+    height: 16px;
+    color: var(--accent);
+    flex-shrink: 0;          /* Keeps arrow from squishing */
+    margin-top: 4px;         /* Perfect vertical nudge for text alignment */
+    transition: transform 0.3s ease;
+}
+
+.benefit-list li strong {
+    color: var(--accent);    /* Makes the labels pop */
+    display: inline;         /* Keeps description on the same line */
+}
+
+/* Hover Effect */
+.benefit-list li:hover .list-arrow {
+    transform: translateX(5px);
+}
+
+/* Cleanup any remaining pseudo-elements */
+.benefit-list li::before {
+    content: none !important;
 }
 
 /* 4. PROJECT GALLERY - REFINED 3D CAROUSEL */

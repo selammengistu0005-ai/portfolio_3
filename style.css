@@ -162,20 +162,6 @@ body {
     padding: 0;
 }
 
-.benefit-list li {
-    margin-bottom: 15px;
-    padding-left: 25px;
-    position: relative;
-}
-
-.benefit-list li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: bold;
-}
-
 /* 4. PROJECT GALLERY - REFINED 3D CAROUSEL */
 .carousel-stage {
     position: relative;

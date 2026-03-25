@@ -404,3 +404,32 @@ body.dark-mode .ball { transform: translateX(32px); }
 .chip { background: var(--accent); color: white; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; }
 .bot-logo-container { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); }
 .bot-logo { max-width: 90%; max-height: 80%; object-fit: contain; }
+
+.slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: var(--glass-blur);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+}

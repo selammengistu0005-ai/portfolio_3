@@ -157,7 +157,7 @@ body {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* --- PROFESSIONAL ARROW & TEXT ALIGNMENT --- */
+/* --- UNIFIED VALUE SECTION ARROWS --- */
 .benefit-list {
     list-style: none;
     padding: 0;
@@ -165,35 +165,38 @@ body {
 }
 
 .benefit-list li {
-    display: flex;
-    align-items: flex-start; /* Aligns arrow with the first line of text */
-    gap: 12px;               /* Precise spacing between arrow and text */
-    margin-bottom: 20px;
-    text-align: left;
+    display: flex !important;
+    align-items: flex-start !important; /* Keeps arrow aligned with the first line of text */
+    gap: 14px !important;              /* Clean spacing between SVG and text */
+    margin-bottom: 18px;
+    position: relative;
+    padding-left: 0 !important;        /* Prevents old padding from pushing text */
+}
+
+/* Hard-kill the old text arrow "→" */
+.benefit-list li::before {
+    content: none !important;
+    display: none !important;
 }
 
 .list-arrow {
-    width: 16px;
-    height: 16px;
+    width: 16px !important;
+    height: 16px !important;
     color: var(--accent);
-    flex-shrink: 0;          /* Keeps arrow from squishing */
-    margin-top: 4px;         /* Perfect vertical nudge for text alignment */
+    flex-shrink: 0;
+    margin-top: 4px; /* Adjusts the arrow to sit perfectly next to the first line */
     transition: transform 0.3s ease;
 }
 
 .benefit-list li strong {
-    color: var(--accent);    /* Makes the labels pop */
-    display: inline;         /* Keeps description on the same line */
+    color: var(--accent);
+    margin-right: 5px;
+    display: inline-block;
 }
 
-/* Hover Effect */
+/* Subtle Hover Animation */
 .benefit-list li:hover .list-arrow {
-    transform: translateX(5px);
-}
-
-/* Cleanup any remaining pseudo-elements */
-.benefit-list li::before {
-    content: none !important;
+    transform: translateX(4px);
 }
 
 /* 4. PROJECT GALLERY - REFINED 3D CAROUSEL */
@@ -341,36 +344,6 @@ body {
 
 body.dark-mode .ball { transform: translateX(32px); }
 
-/* SECTION 7.1 ARROW STYLING */
-
-/* 1. Base style for the arrow SVG */
-.list-arrow {
-    width: 14px;             /* Define a precise width */
-    height: 14px;            /* Precise height */
-    color: var(--accent);    /* Dynamically use your accent color */
-    margin-right: 12px;      /* Give professional breathing room from the text */
-    flex-shrink: 0;          /* Prevent the SVG from squashing */
-    transition: transform 0.3s ease; /* Subtle hover animation prep */
-}
-
-/* 2. Vertically align the list item content properly */
-.benefit-list li {
-    display: flex;           /* Use flexbox to align the SVG and text horizontally */
-    align-items: center;     /* Center them perfectly vertically */
-    margin-bottom: 15px;      /* Standard spacing between list items */
-    position: relative;
-    padding-left: 0;          /* Reset padding so the SVG handles spacing */
-}
-
-/* 3. Remove the old text-based pseudo-element if it exists from earlier versions */
-.benefit-list li::before {
-    content: none !important;
-}
-
-/* Optional "Nudge" Animation on Hover - Purely for polish */
-.benefit-list li:hover .list-arrow {
-    transform: translateX(3px); /* Gently move the arrow right on hover */
-}
 
 /* 6. RESPONSIVENESS */
 @media (max-width: 768px) {

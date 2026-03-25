@@ -158,28 +158,30 @@ body {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* 1. The User Bubble Tail (Left side) */
+/* Update User Tail */
 .msg.user::before {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: -8px; /* Pulls it outside the bubble */
+    bottom: 5px; /* Nudged up from the very bottom */
+    left: -10px;
     width: 0;
     height: 0;
-    border-right: 12px solid #333; /* Matches your user bubble color */
-    border-top: 12px solid transparent;
+    border-right: 12px solid #333;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent; /* Makes it a sharper "side" tail */
 }
 
-/* 2. The Bot Bubble Tail (Right side) */
+/* Update Bot Tail */
 .msg.bot::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    right: -8px; /* Pulls it outside the bubble */
+    bottom: 5px; /* Nudged up from the very bottom */
+    right: -10px;
     width: 0;
     height: 0;
-    border-left: 12px solid var(--accent); /* Matches your bot neon color */
-    border-top: 12px solid transparent;
+    border-left: 12px solid var(--accent);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
 }
 
 /* --- FINAL FIX: VALUE SECTION ARROWS --- */
